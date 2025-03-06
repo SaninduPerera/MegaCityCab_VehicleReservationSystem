@@ -100,22 +100,4 @@ mvn test
 
 ---
 
-## **Contributing**
-1. **Fork the repository**  
-2. **Create a new branch** (`feature-xyz`)  
-3. **Commit your changes**  
-4. **Push to the branch**  
-5. **Submit a Pull Request (PR)**  
-
----
-
-## **License**
-This project is **open-source** under the **MIT License**.
-
----
-
-## **Contact & Support**
-📧 **Email:** support@vrs.com  
-🔗 **GitHub Repo:** [https://github.com/yourusername/vehicle-reservation-system](https://github.com/yourusername/vehicle-reservation-system)  
-
 🚀 Happy Coding! 🚗💨
