@@ -41,7 +41,7 @@ The **Vehicle Reservation System** is a web-based application designed to allow 
 ### **1. Clone the Repository**
 ```sh
 git clone https://github.com/SaninduPerera/MegaCityCab_VehicleReservationSystem.git
-cd vehicle-reservation-system
+cd OnlineVehicleReservationSystem
 ```
 
 ### **2. Configure the Database**
