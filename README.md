@@ -1,103 +1,169 @@
 # MegaCityCab Vehicle Reservation System
 
-The **MegaCityCab Vehicle Reservation System** is a Java-based web application designed to manage vehicle bookings efficiently. It allows users to book vehicles, view their bookings, and make payments. Administrators can manage vehicles, users, and bookings. The system is built using **Java Servlets**, **JSP**, and **MySQL**, and follows a 3-tier architecture with the DAO pattern for database interactions.
+![Java](https://img.shields.io/badge/Java-17-blue)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-orange)
+![Apache Tomcat](https://img.shields.io/badge/Apache%20Tomcat-9.0-green)
+![Maven](https://img.shields.io/badge/Maven-3.8.1-red)
+
+The **MegaCityCab Vehicle Reservation System** is a comprehensive web-based application designed to streamline the operations of a cab service in Colombo City. It allows employees (Admin, Manager, and Receptionist) to manage customer bookings, vehicles, drivers, and billing efficiently.
 
 ---
 
 ## Features
 
-### **User Features**
-- **User Registration and Login**: Users can register and log in to the system.
-- **Book a Vehicle**: Users can book available vehicles by selecting a vehicle, pickup location, and drop location.
-- **View Bookings**: Users can view their booking history.
-- **Make Payments**: Users can make payments for their bookings.
-- **Cancel Bookings**: Users can cancel bookings before confirmation.
+- **Role-Based Access Control**:
+  - **Admin**: Full access to all functionalities.
+  - **Manager**: Manage bookings, vehicles, and drivers.
+  - **Receptionist**: Add and view customer bookings.
 
-### **Admin Features**
-- **Manage Vehicles**: Admins can add, edit, and remove vehicles.
-- **Manage Users**: Admins can view and manage user accounts.
-- **Manage Bookings**: Admins can view and manage all bookings.
-- **Generate Reports**: Admins can generate reports for bookings and payments.
+- **Customer Management**:
+  - Register new customers.
+  - View and update customer details.
+
+- **Booking Management**:
+  - Create, update, and view bookings.
+  - Assign vehicles and drivers to bookings.
+
+- **Vehicle Management**:
+  - Add, update, and view vehicle details.
+  - Track vehicle availability.
+
+- **Driver Management**:
+  - Add, update, and view driver details.
+  - Track driver availability.
+
+- **Billing**:
+  - Generate bills for completed bookings.
+  - Apply discounts and taxes.
+
+- **Reports**:
+  - Generate booking and revenue reports.
 
 ---
 
 ## Technologies Used
 
-- **Frontend**: HTML, CSS, JSP
-- **Backend**: Java Servlets
+- **Backend**: Java (Servlet, JSP)
 - **Database**: MySQL
+- **Frontend**: HTML, CSS, Bootstrap
 - **Build Tool**: Maven
-- **Server**: Apache Tomcat 9
-- **Password Hashing**: BCrypt
+- **Web Server**: Apache Tomcat 9.0
+
+---
+
+## Prerequisites
+
+Before running the project, ensure you have the following installed:
+
+1. **Java Development Kit (JDK)**: Version 17 or higher.
+2. **MySQL**: Version 8.0 or higher.
+3. **Apache Tomcat**: Version 9.0 or higher.
+4. **Maven**: Version 3.8.1 or higher.
 
 ---
 
 ## Setup Instructions
 
-### **Prerequisites**
-1. **Java Development Kit (JDK)**: Install JDK 8 or later.
-2. **Apache Tomcat**: Install Apache Tomcat 9 or later.
-3. **MySQL**: Install MySQL and create a database named `vehicle_reservation_system`.
-4. **Maven**: Install Maven for building the project.
+### 1. Clone the Repository
 
-### **Steps to Run the Project**
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/SaninduPerera/MegaCityCab_VehicleReservationSystem.git
-   cd OnlineVehicleReservationSystem
+```bash
+git clone https://github.com/SaninduPerera/MegaCityCab_VehicleReservationSystem.git
+cd MegaCityCab
+```
+
+### 2. Set Up the Database
+
+1. Open MySQL and create a new database:
+   ```sql
+   CREATE DATABASE MegaCityCab_DB;
+   USE MegaCityCab_DB;
    ```
 
-2. **Set Up the Database**:
-   - Run the SQL script `database.sql` file to create the tables and insert sample data.
+2. Run the SQL script provided in the `MegaCityCab_DB.sql` file to create the necessary tables and insert sample data.
 
-3. **Configure Database Connection**:
-   - Update the `DBConnection.java` file with your MySQL credentials:
-     ```java
-     private static final String URL = "jdbc:mysql://localhost:3306/vehicle_reservation_system";
-     private static final String USER = "your_username";
-     private static final String PASSWORD = "your_password";
-     ```
+### 3. Configure Database Connection
 
-4. **Build the Project**:
-   ```bash
-   mvn clean install
-   ```
+Update the `DBConnection.java` file with your MySQL credentials:
 
-5. **Deploy to Tomcat**:
-   - Copy the generated `.war` file from the `target` folder to the `webapps` directory of your Tomcat installation.
-   - Start Tomcat:
-     ```bash
-     ./bin/startup.sh  # Linux/macOS
-     bin\startup.bat   # Windows
-     ```
+```java
+private String url = "jdbc:mysql://localhost:3306/MegaCityCab_DB";
+private String username = "your_mysql_username";
+private String password = "your_mysql_password";
+```
 
-6. **Access the Application**:
-   - Open your browser and navigate to:
-     ```
-     http://localhost:8080/OnlineVehicleReservationSystem
-     ```
+### 4. Build the Project
+
+Run the following Maven command to build the project:
+
+```bash
+mvn clean install
+```
+
+### 5. Deploy the Application
+
+1. Copy the generated `.war` file from the `target` directory to the `webapps` directory of your Tomcat server.
+2. Start the Tomcat server.
+
+### 6. Access the Application
+
+Open your browser and navigate to:
+
+```
+http://localhost:8080/MegaCityCab
+```
 
 ---
 
-## Default Admin Credentials
-- **Username**: `admin`
-- **Password**: `admin123`
+## Default Login Credentials
+
+- **Admin**:
+  - **Username**: `admin`
+  - **Password**: `admin123`
+
+- **Manager**:
+  - **Username**: `manager1`
+  - **Password**: `manager123`
+
+- **Receptionist**:
+  - **Username**: `receptionist1`
+  - **Password**: `recep123`
+
+---
+
+## Folder Structure
+
+```
+MegaCityCab/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── com/
+│   │   │   │   ├── megacitycab/
+│   │   │   │   │   ├── controller/
+│   │   │   │   │   ├── dao/
+│   │   │   │   │   ├── model/
+│   │   │   │   │   ├── service/
+│   │   │   │   │   ├── util/
+│   │   ├── webapp/
+│   │   │   ├── WEB-INF/
+│   │   │   ├── jsp/
+├── pom.xml
+```
 
 ---
 
 ## Screenshots
 
-![image](https://github.com/user-attachments/assets/b2beacc9-26c7-4cdc-b658-2585478abbf5)
+### Login Page
+![Login Page](screenshots/login.png)
 
-### **Login Page**
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
 
-![image](https://github.com/user-attachments/assets/d225ba40-51ec-4a85-92e1-74873c85838a)
+### Booking List
+![Booking List](screenshots/booking-list.png)
 
-### **User Dashboard**
-
-![image](https://github.com/user-attachments/assets/8f9a41a4-2772-4041-b594-a5c19509c9de)
-
-### **Admin Dashboard**
-![Admin Dashboard](screenshots/admin_dashboard.png)
+### Add Booking
+![Add Booking](screenshots/add-booking.png)
 
 ---
