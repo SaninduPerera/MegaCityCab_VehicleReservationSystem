@@ -130,28 +130,6 @@ http://localhost:8080/MegaCityCab
 
 ---
 
-## Folder Structure
-
-```
-MegaCityCab/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   ├── com/
-│   │   │   │   ├── megacitycab/
-│   │   │   │   │   ├── controller/
-│   │   │   │   │   ├── dao/
-│   │   │   │   │   ├── model/
-│   │   │   │   │   ├── service/
-│   │   │   │   │   ├── util/
-│   │   ├── webapp/
-│   │   │   ├── WEB-INF/
-│   │   │   ├── jsp/
-├── pom.xml
-```
-
----
-
 ## Screenshots
 
 ### Login Page
