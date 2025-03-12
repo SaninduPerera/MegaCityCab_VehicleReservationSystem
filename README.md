@@ -135,8 +135,8 @@ http://localhost:8080/MegaCityCab
 ### Login Page
 ![image](https://github.com/user-attachments/assets/2e990740-e397-49b0-8435-82628e473e97)
 
-### Dashboard
-![Dashboard](screenshots/dashboard.png)
+### Admin Dashboard
+![image](https://github.com/user-attachments/assets/8cbcc6ce-551c-4650-b369-ca3e36d474e6)
 
 ### Add Customer
 ![image](https://github.com/user-attachments/assets/242ccaef-ae8e-49d7-a607-0bea30e5867a)
