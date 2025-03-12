@@ -138,10 +138,13 @@ http://localhost:8080/MegaCityCab
 ### Dashboard
 ![Dashboard](screenshots/dashboard.png)
 
-### Booking List
-![Booking List](screenshots/booking-list.png)
+### Add Customer
+![image](https://github.com/user-attachments/assets/242ccaef-ae8e-49d7-a607-0bea30e5867a)
+
+### View Customers
+![image](https://github.com/user-attachments/assets/a8814a76-401a-4283-a834-9cb82469d44a)
 
 ### Add Booking
-![Add Booking](screenshots/add-booking.png)
+![image](https://github.com/user-attachments/assets/4e8ce25f-8df9-421a-b6cd-33ae7a1e6642)
 
 ---
