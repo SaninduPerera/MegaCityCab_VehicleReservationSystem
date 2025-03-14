@@ -138,6 +138,18 @@ http://localhost:8080/MegaCityCab
 ### Admin Dashboard
 ![image](https://github.com/user-attachments/assets/94a276ff-1a39-45f3-a783-e5d51908e27c)
 
+### Manager Dashboard
+![image](https://github.com/user-attachments/assets/6137a190-0642-4c7a-8f00-aa76afca7fcb)
+
+### Receptionist Dashboard
+![image](https://github.com/user-attachments/assets/f5a89063-a62a-4750-8cea-166d41efdda1)
+
+### Add Employee
+![image](https://github.com/user-attachments/assets/397bb4b5-4d37-4bc6-997e-1fbdd1eb2037)
+
+### View Employees
+![image](https://github.com/user-attachments/assets/60298f0e-1fd1-4e9a-a497-d51d003c0f29)
+
 ### Add Customer
 ![image](https://github.com/user-attachments/assets/135dc1fc-c970-4923-9472-cace59c0a5f5)
 
@@ -146,5 +158,20 @@ http://localhost:8080/MegaCityCab
 
 ### Add Booking
 ![image](https://github.com/user-attachments/assets/b708659f-9c82-451e-ab07-a3033bf7cd7c)
+
+### View Bookings
+![image](https://github.com/user-attachments/assets/2d225612-ea7e-49cc-b1a0-327ac1a5dd78)
+
+### Add Vehicle
+![image](https://github.com/user-attachments/assets/c45dd705-3c65-4080-a495-17ef9151f5a4)
+
+### View Vehicles
+![image](https://github.com/user-attachments/assets/28841537-48b1-4b66-a35b-86714b337c92)
+
+### Add Driver
+![image](https://github.com/user-attachments/assets/c3d8d8ff-c090-481f-8799-72cf61e47628)
+
+### View Drivers
+![image](https://github.com/user-attachments/assets/12d19bc8-2e0f-499e-86a6-1a54b7d81247)
 
 ---
