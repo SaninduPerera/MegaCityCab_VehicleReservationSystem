@@ -133,18 +133,18 @@ http://localhost:8080/MegaCityCab
 ## Screenshots
 
 ### Login Page
-![image](https://github.com/user-attachments/assets/2e990740-e397-49b0-8435-82628e473e97)
+![image](https://github.com/user-attachments/assets/377c6cd8-5aca-4873-b16a-bbd3c94f3bb9)
 
 ### Admin Dashboard
-![image](https://github.com/user-attachments/assets/8cbcc6ce-551c-4650-b369-ca3e36d474e6)
+![image](https://github.com/user-attachments/assets/94a276ff-1a39-45f3-a783-e5d51908e27c)
 
 ### Add Customer
-![image](https://github.com/user-attachments/assets/242ccaef-ae8e-49d7-a607-0bea30e5867a)
+![image](https://github.com/user-attachments/assets/135dc1fc-c970-4923-9472-cace59c0a5f5)
 
 ### View Customers
-![image](https://github.com/user-attachments/assets/a8814a76-401a-4283-a834-9cb82469d44a)
+![image](https://github.com/user-attachments/assets/933ff824-4860-4a43-8223-28981fac5aaf)
 
 ### Add Booking
-![image](https://github.com/user-attachments/assets/4e8ce25f-8df9-421a-b6cd-33ae7a1e6642)
+![image](https://github.com/user-attachments/assets/b708659f-9c82-451e-ab07-a3033bf7cd7c)
 
 ---
