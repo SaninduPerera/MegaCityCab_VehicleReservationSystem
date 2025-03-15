@@ -3,10 +3,14 @@ package com.megacitycab.controller;
 import com.megacitycab.model.Bill;
 import com.megacitycab.model.Booking;
 import com.megacitycab.model.Customer;
+import com.megacitycab.model.Driver;
 import com.megacitycab.model.Employee;
+import com.megacitycab.model.Vehicle;
 import com.megacitycab.service.BillService;
 import com.megacitycab.service.BookingService;
 import com.megacitycab.service.CustomerService;
+import com.megacitycab.service.DriverService;
+import com.megacitycab.service.VehicleService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,17 +29,20 @@ public class BillServlet extends HttpServlet {
     private BillService billService;
     private BookingService bookingService;
     private CustomerService customerService;
-
+    private VehicleService vehicleService;
+    private DriverService driverService;
     @Override
     public void init() throws ServletException {
         super.init();
         billService = new BillService();
         bookingService = new BookingService();
         customerService = new CustomerService();
+        vehicleService = new VehicleService();
+        driverService = new DriverService();
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
 
@@ -57,7 +64,7 @@ public class BillServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
 
@@ -78,89 +85,38 @@ public class BillServlet extends HttpServlet {
         }
     }
 
-    private void listBills(HttpServletRequest request, HttpServletResponse response) 
+    private void listBills(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
         List<Bill> bills = billService.getAllBills();
         request.setAttribute("bills", bills);
         request.getRequestDispatcher("/jsp/bill/list.jsp").forward(request, response);
     }
 
-    private void showGenerateForm(HttpServletRequest request, HttpServletResponse response) 
+    private void showGenerateForm(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        String bookingIdParam = request.getParameter("bookingId");
-
-        if (bookingIdParam == null || bookingIdParam.isEmpty()) {
-            request.setAttribute("error", "Missing or invalid booking ID.");
-            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
-            return;
-        }
-
-        int bookingId;
-        try {
-            bookingId = Integer.parseInt(bookingIdParam);
-        } catch (NumberFormatException e) {
-            request.setAttribute("error", "Invalid booking ID format.");
-            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
-            return;
-        }
-
-        Booking booking = bookingService.getBookingById(bookingId);
-        if (booking == null) {
-            request.setAttribute("error", "Booking not found.");
-            request.getRequestDispatcher("/jsp/error.jsp").forward(request, response);
-            return;
-        }
-
-        Customer customer = customerService.getCustomerById(booking.getCustomerId());
-
-        request.setAttribute("booking", booking);
-        request.setAttribute("customer", customer);
+        List<Booking> bookings = bookingService.getAllBookings();
+        
+        request.setAttribute("bookings", bookings);
         request.getRequestDispatcher("/jsp/bill/generate.jsp").forward(request, response);
     }
 
-    private void showEditForm(HttpServletRequest request, HttpServletResponse response) 
-            throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Bill bill = billService.getBillById(id);
-        Booking booking = bookingService.getBookingById(bill.getBookingId());
-
-        request.setAttribute("bill", bill);
-        request.setAttribute("booking", booking);
-        request.getRequestDispatcher("/jsp/bill/edit.jsp").forward(request, response);
-    }
-
-    private void viewBill(HttpServletRequest request, HttpServletResponse response) 
-            throws SQLException, ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Bill bill = billService.getBillById(id);
-        Booking booking = bookingService.getBookingById(bill.getBookingId());
-        Customer customer = customerService.getCustomerById(booking.getCustomerId());
-
-        request.setAttribute("bill", bill);
-        request.setAttribute("booking", booking);
-        request.setAttribute("customer", customer);
-        request.getRequestDispatcher("/jsp/bill/view.jsp").forward(request, response);
-    }
-
-    private void generateBill(HttpServletRequest request, HttpServletResponse response) 
+    private void generateBill(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         HttpSession session = request.getSession();
         Employee employee = (Employee) session.getAttribute("employee");
 
+        if (employee == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
         String bookingIdParam = request.getParameter("bookingId");
         if (bookingIdParam == null || bookingIdParam.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/bill?error=Missing booking ID");
+            response.sendRedirect(request.getContextPath() + "/bill/generate?error=Please select a booking");
             return;
         }
 
-        int bookingId;
-        try {
-            bookingId = Integer.parseInt(bookingIdParam);
-        } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/bill?error=Invalid booking ID");
-            return;
-        }
-
+        int bookingId = Integer.parseInt(bookingIdParam);
         BigDecimal waitingHours = new BigDecimal(request.getParameter("waitingHours"));
         boolean isNightTrip = "on".equals(request.getParameter("isNightTrip"));
 
@@ -174,20 +130,44 @@ public class BillServlet extends HttpServlet {
         String paymentMethod = request.getParameter("paymentMethod");
 
         int billId = billService.generateBill(
-            bookingId, 
-            waitingHours, 
-            isNightTrip, 
-            discountAmount, 
-            discountReason, 
-            paymentMethod, 
-            employee.getEmployeeId(), 
-            request.getRemoteAddr()
+                bookingId,
+                waitingHours,
+                isNightTrip,
+                discountAmount,
+                discountReason,
+                paymentMethod,
+                employee.getEmployeeId(),
+                request.getRemoteAddr()
         );
 
         response.sendRedirect(request.getContextPath() + "/bill/view?id=" + billId);
     }
 
-    private void updateBill(HttpServletRequest request, HttpServletResponse response) 
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Bill bill = billService.getBillById(id);
+        Booking booking = bookingService.getBookingById(bill.getBookingId());
+
+        request.setAttribute("bill", bill);
+        request.setAttribute("booking", booking);
+        request.getRequestDispatcher("/jsp/bill/edit.jsp").forward(request, response);
+    }
+
+    private void viewBill(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Bill bill = billService.getBillById(id);
+        Booking booking = bookingService.getBookingById(bill.getBookingId());
+        Customer customer = customerService.getCustomerById(booking.getCustomerId());
+
+        request.setAttribute("bill", bill);
+        request.setAttribute("booking", booking);
+        request.setAttribute("customer", customer);
+        request.getRequestDispatcher("/jsp/bill/view.jsp").forward(request, response);
+    }
+
+    private void updateBill(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         HttpSession session = request.getSession();
         Employee employee = (Employee) session.getAttribute("employee");
@@ -195,17 +175,14 @@ public class BillServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Bill bill = billService.getBillById(id);
 
-        String paymentMethod = request.getParameter("paymentMethod");
-        String paymentStatus = request.getParameter("paymentStatus");
-
-        bill.setPaymentMethod(paymentMethod);
-        bill.setPaymentStatus(paymentStatus);
+        bill.setPaymentMethod(request.getParameter("paymentMethod"));
+        bill.setPaymentStatus(request.getParameter("paymentStatus"));
 
         billService.updateBill(bill, request.getRemoteAddr(), employee.getEmployeeId());
         response.sendRedirect(request.getContextPath() + "/bill");
     }
 
-    private void deleteBill(HttpServletRequest request, HttpServletResponse response) 
+    private void deleteBill(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException {
         HttpSession session = request.getSession();
         Employee employee = (Employee) session.getAttribute("employee");

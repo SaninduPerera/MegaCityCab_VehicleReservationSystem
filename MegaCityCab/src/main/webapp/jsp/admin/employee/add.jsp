@@ -111,7 +111,7 @@
                         <option value="">--Select Role--</option>
                         <option value="ADMIN">Administrator</option>
                         <option value="MANAGER">Manager</option>
-                        <option value="RECEPTIONIST">Dispatcher</option>
+                        <option value="RECEPTIONIST">Receptionist</option>
                     </select>
                 </div>
                 
